@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Swad Sutra Onboarding</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <style>
+    :root {
+      --beige: #fff3e0;
+      --brown: #6d3b26;
+      --orange: #f57c00;
+      --light-brown: #efebe9;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: var(--beige);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      background: white;
+      border-radius: 12px;
+      padding: 30px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+    }
+
+    input, button {
+      margin: 10px 0;
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 6px;
+      border: 1px solid var(--light-brown);
+    }
+
+    button {
+      background: var(--brown);
+      color: white;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    button:hover {
+      background: var(--orange);
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    h2 {
+      color: var(--brown);
+      margin-bottom: 20px;
+    }
+
+    /* Vertical scroll container */
+    .scroll-container {
+      max-height: 180px;
+      overflow-y: auto;
+      margin-bottom: 20px;
+      text-align: left;
+      border: 1px solid var(--light-brown);
+      padding: 10px;
+      border-radius: 8px;
+      background: var(--beige);
+    }
+
+    .scroll-container::-webkit-scrollbar {
+      width: 6px;
+    }
+    .scroll-container::-webkit-scrollbar-thumb {
+      background: var(--brown);
+      border-radius: 3px;
+    }
+
+    .tag-btn {
+      display: block;
+      width: 100%;
+      background-color: var(--brown);
+      color: white;
+      margin: 5px 0;
+      padding: 10px;
+      border-radius: 6px;
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    .tag-btn.selected {
+      background-color: var(--orange);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Page 1: User Details -->
+  <div class="container" id="page1">
+    <h2>Enter Your Details</h2>
+    <input type="text" placeholder="Username" id="username" />
+    <input type="date" id="dob" />
+    <button onclick="nextPage()">Start</button>
+  </div>
+
+  <!-- Page 2: Food Preference with vertical scroll -->
+  <div class="container hidden" id="page2">
+    <h2>Food Preference</h2>
+    <div class="scroll-container">
+      <button class="tag-btn" onclick="selectTag(this, 'food', 'veg')">Vegetarian</button>
+      <button class="tag-btn" onclick="selectTag(this, 'food', 'nonveg')">Non-Vegetarian</button>
+      <button class="tag-btn" onclick="selectTag(this, 'food', 'vegan')">Vegan</button>
+      <button class="tag-btn" onclick="selectTag(this, 'food', 'pescatarian')">Pescatarian</button>
+      <button class="tag-btn" onclick="selectTag(this, 'food', 'keto')">Keto</button>
+      <button class="tag-btn" onclick="selectTag(this, 'food', 'glutenfree')">Gluten-Free</button>
+      <button class="tag-btn" onclick="selectTag(this, 'food', 'paleo')">Paleo</button>
+    </div>
+    <button onclick="nextPage()">Next</button>
+  </div>
+
+  <!-- Page 3: Taste Preference with vertical scroll -->
+  <div class="container hidden" id="page3">
+    <h2>Taste Preference</h2>
+    <div class="scroll-container">
+      <button class="tag-btn" onclick="selectTag(this, 'taste', 'spicy')">Spicy</button>
+      <button class="tag-btn" onclick="selectTag(this, 'taste', 'sweet')">Sweet</button>
+      <button class="tag-btn" onclick="selectTag(this, 'taste', 'savory')">Savory</button>
+    </div>
+    <button onclick="nextPage()">Next</button>
+  </div>
+
+  <!-- Page 4: Allergies -->
+  <div class="container hidden" id="page4">
+    <h2>Allergies (if any)</h2>
+    <input type="text" id="allergies" placeholder="e.g., peanuts, gluten" />
+    <button onclick="nextPage()">Next</button>
+  </div>
+
+  <!-- Page 5: Welcome -->
+  <div class="container hidden" id="page5">
+    <h2>Welcome to Swad Sutra!</h2>
+    <p>Your profile is ready—and we’ll personalize your food journey. 🍲</p>
+  </div>
+
+  <script>
+    let currentPage = 1;
+    const selections = {
+      username: '',
+      dob: '',
+      food: '',
+      taste: '',
+      allergies: ''
+    };
+
+    function nextPage() {
+      if (currentPage === 1) {
+        const user = document.getElementById('username').value.trim();
+        const birth = document.getElementById('dob').value;
+        if (!user || !birth) {
+          alert('Please enter your name and date of birth.');
+          return;
+        }
+        selections.username = user;
+        selections.dob = birth;
+      }
+      if (currentPage === 4) {
+        selections.allergies = document.getElementById('allergies').value.trim();
+      }
+
+      document.getElementById(`page${currentPage}`).classList.add('hidden');
+      currentPage++;
+      document.getElementById(`page${currentPage}`).classList.remove('hidden');
+    }
+
+    function selectTag(btn, key, value) {
+      selections[key] = value;
+      btn.parentElement.querySelectorAll('.tag-btn')
+         .forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+    }
+  </script>
+
+</body>
+</html>

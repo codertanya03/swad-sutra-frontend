@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Swad Sutra</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Yatra+One&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    :root {
+      --brown: #6d3b26;
+      --orange: #f57c00;
+      --beige: #fff3e0;
+      --card-bg: #ffcc80;
+    }
+
+    body {
+      background-color: var(--beige);
+      color: var(--brown);
+    }
+
+    .navbar {
+      background-color: var(--brown);
+      color: white;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo-img {
+      height: 30px;
+      width: auto;
+      vertical-align: middle;
+      margin-right: 8px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .nav-links a,
+    .profile-btn {
+      color: #fff;
+    }
+
+    .logo {
+      color: #fff;
+    }
+
+    .nav-links a:hover {
+      text-decoration: underline;
+    }
+
+    .profile-btn {
+      font-size: 20px;
+      background: none;
+      border: none;
+      color: white;
+      cursor: pointer;
+    }
+
+    /* New CoPilot button */
+    .copilot-btn {
+      margin-left: 15px;
+      padding: 8px 12px;
+      background-color: #ff7a00;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .copilot-btn:hover {
+      background-color: #e26600;
+    }
+
+    .hero {
+      background: url('https://source.unsplash.com/1600x600/?indian-food') no-repeat center center/cover;
+      text-align: center;
+      color: white;
+      padding: 100px 20px;
+      text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
+    }
+
+    .hero h1 {
+      font-size: 64px;
+    }
+
+    .hero p {
+      font-size: 24px;
+      margin-top: 10px;
+    }
+
+    .description,
+    .how-it-works,
+    .why-swad {
+      padding: 60px 20px;
+      text-align: center;
+    }
+
+    .steps-container,
+    .features-container {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 25px;
+      margin-top: 30px;
+    }
+
+    .step-box,
+    .feature-box {
+      background-color: var(--card-bg);
+      padding: 20px;
+      max-width: 250px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s;
+    }
+
+    .step-box:hover,
+    .feature-box:hover {
+      transform: translateY(-5px);
+    }
+
+    footer {
+      background-color: var(--orange);
+      color: white;
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .steps-container,
+      .features-container {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .nav-links {
+        flex-direction: column;
+        gap: 10px;
+      }
+    }
+
+    /* Login Modal Styles */
+    .login-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.5);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .login-box {
+      background-color: var(--beige);
+      border: 2px solid var(--brown);
+      padding: 30px 25px;
+      border-radius: 12px;
+      width: 90%;
+      max-width: 400px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .login-box h2 {
+      color: var(--brown);
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .login-box label {
+      display: block;
+      margin: 10px 0 5px;
+      font-weight: 600;
+      color: var(--brown);
+    }
+
+    .login-box input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 15px;
+      margin-bottom: 12px;
+    }
+
+    .password-container {
+      position: relative;
+    }
+
+    .toggle-password {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 14px;
+      color: var(--brown);
+      cursor: pointer;
+    }
+
+    .login-btn {
+      width: 100%;
+      background-color: var(--orange);
+      color: white;
+      padding: 12px;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      font-weight: 600;
+      margin-top: 5px;
+      cursor: pointer;
+    }
+
+    .signup-text {
+      text-align: center;
+      margin-top: 15px;
+      font-size: 14px;
+      color: var(--brown);
+    }
+
+    .signup-text a {
+      color: var(--orange);
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="logo">
+      <img src="logo1.jpg" alt="Swad Sutra Logo" class="logo-img" />
+      Swad Sutra
+    </div>
+    <div class="nav-links">
+      <a href="home.html">Home</a>
+      <a href="#about">About Us</a>
+      <a href="#contact">Contact</a>
+      <button class="profile-btn">👤</button>
+      <button class="copilot-btn" onclick="handleCopilotClick()">🧑‍🍳 CoPilot</button>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <h1 class="swad-heading">Swad Sutra</h1>
+  </header>
+
+  <section class="description" id="about">
+    <h2>What is Swad Sutra?</h2>
+    <p>Swad Sutra is your personal AI Rasoi, suggesting delicious Indian recipes based on the ingredients in your kitchen. No more wondering what to cook — just enter what you have, and let the magic happen!</p>
+  </section>
+
+  <section class="how-it-works">
+    <h2>How It Works</h2>
+    <div class="steps-container">
+      <div class="step-box">
+        <h3>1. Enter Ingredients</h3>
+        <p>Tell us what's in your fridge.</p>
+      </div>
+      <div class="step-box">
+        <h3>2. Get Recipes</h3>
+        <p>Our AI suggests dishes instantly.</p>
+      </div>
+      <div class="step-box">
+        <h3>3. Start Cooking</h3>
+        <p>Follow easy steps and enjoy!</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="why-swad">
+    <h2>Why Swad Sutra?</h2>
+    <div class="features-container">
+      <div class="feature-box">🧠 Smart AI Suggestions</div>
+      <div class="feature-box">🥕 Use Ingredients You Have</div>
+      <div class="feature-box">👨‍🍳 Authentic Indian Recipes</div>
+      <div class="feature-box">📱 Easy & Intuitive</div>
+    </div>
+  </section>
+
+  <footer id="contact">
+    <p>© 2025 Swad Sutra. Cook Smart, Eat Desi.</p>
+  </footer>
+
+  <!-- Login Modal -->
+  <div class="login-modal" id="loginModal">
+    <div class="login-box">
+      <h2>Log In</h2>
+      <label for="email">Email</label>
+      <input type="email" id="email" placeholder="you@example.com" />
+      <label for="password">Password</label>
+      <div class="password-container">
+        <input type="password" id="password" placeholder="Password" />
+        <span class="toggle-password" onclick="togglePassword()">Show</span>
+      </div>
+      <button class="login-btn">Log In</button>
+      <p class="signup-text">
+        Don’t have an account yet? <a href="#">Sign Up</a>
+      </p>
+    </div>
+  </div>
+
+  <script>
+    function handleCopilotClick() {
+      const isLoggedIn = localStorage.getItem('loggedIn'); // Change logic based on your backend
+      if (!isLoggedIn) {
+        document.getElementById('loginModal').style.display = 'block';
+      } else {
+        window.location.href = 'copilot.html'; // CoPilot page
+      }
+    }
+
+    document.querySelector('.login-btn').addEventListener('click', () => {
+      localStorage.setItem('loggedIn', 'true');
+      document.getElementById('loginModal').style.display = 'none';
+      window.location.href = 'copilot.html'; // Redirect to CoPilot after login
+    });
+  </script>
+</body>
+</html>

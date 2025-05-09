@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Welcome to Swad Sutra</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background: linear-gradient(270deg, #3b1e0f, #ff6f00, #3b1e0f);
+      background-size: 600% 600%;
+      animation: gradientShift 15s ease infinite;
+      text-align: center;
+    }
+
+    @keyframes gradientShift {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
+    }
+
+    img.logo {
+      width: 250px;
+      max-width: 80%;
+      margin-bottom: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    }
+
+    h1 {
+      font-size: 2.7em;
+      margin: 0;
+    }
+
+    p {
+      font-size: 1.2em;
+      margin-top: 10px;
+      margin-bottom: 30px;
+    }
+
+    .enter-button {
+      padding: 15px 30px;
+      font-size: 1em;
+      background-color: #ffb347;
+      color: #3b1e0f;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .enter-button:hover {
+      background-color: #ffd580;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ✅ Replace with correct logo path -->
+  <img class="logo" src="logo.jpg" alt="Swad Sutra Logo" />
+
+  <h1>Welcome to Swad Sutra</h1>
+  <p>Ek chutki tech, aur swaad ka sutra mil gaya!</p>
+
+  <!-- ✅ This button links to home.html -->
+  <button class="enter-button" onclick="window.location.href='home.html'">Enter Now</button>
+
+</body>
+</html>

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login - Swad Sutra</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background-color: #4b1e0d;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .login-card {
+      background: white;
+      color: #4b1e0d;
+      padding: 2rem;
+      border-radius: 20px;
+      max-width: 450px;
+      width: 95%;
+      text-align: center;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+
+    .login-card h2 {
+      margin-bottom: 1rem;
+    }
+
+    .login-card p {
+      font-size: 0.9rem;
+      color: #666;
+      margin-bottom: 1rem;
+    }
+
+    .login-card input, .login-card select {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      font-size: 1rem;
+    }
+
+    .dob-row {
+      display: flex;
+      gap: 10px;
+    }
+
+    .dob-row select {
+      flex: 1;
+    }
+
+    .btn {
+      background-color: #4b1e0d;
+      color: white;
+      padding: 10px;
+      width: 100%;
+      border: none;
+      border-radius: 10px;
+      font-weight: bold;
+      margin-top: 15px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .btn:disabled {
+      background-color: #aaa;
+      cursor: not-allowed;
+    }
+
+    .btn.back {
+      background: transparent;
+      color: #4b1e0d;
+      border: 2px solid #4b1e0d;
+      margin-top: 10px;
+    }
+
+    #password-hint {
+      font-size: 0.85rem;
+      margin-top: 5px;
+      color: #4b1e0d;
+      text-align: left;
+    }
+
+    .valid-message {
+      color: green;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-card">
+    <h2>Login to Swad Sutra</h2>
+    <p>Your information will be updated on your profile page and displayed in your dashboard.</p>
+
+    <input type="text" placeholder="Full Name" required />
+    <input type="email" placeholder="Email" required />
+    <input type="password" id="password" placeholder="Password" required oninput="validatePassword()" />
+    <div id="password-hint">Password must include 8+ characters, uppercase, lowercase & a number.</div>
+    <div id="password-status"></div>
+
+    <div class="dob-row">
+      <select id="month">
+        <option selected disabled>Month</option>
+      </select>
+      <select id="day">
+        <option selected disabled>Day</option>
+      </select>
+      <select id="year">
+        <option selected disabled>Year</option>
+      </select>
+    </div>
+
+    <button class="btn" id="continueBtn" disabled>Continue</button>
+    <button class="btn back" onclick="location.href='index.html'">Back to Home</button>
+  </div>
+
+  <script>
+    // Populate month
+    const months = [
+      "January", "February", "March", "April", "May", "June",
+      "July", "August", "September", "October", "November", "December"
+    ];
+    const monthSelect = document.querySelector("#month");
+    months.forEach((month, index) => {
+      const option = document.createElement("option");
+      option.value = index + 1;
+      option.textContent = month;
+      monthSelect.appendChild(option);
+    });
+
+    // Populate days
+    const daySelect = document.querySelector("#day");
+    for (let i = 1; i <= 31; i++) {
+      const option = document.createElement("option");
+      option.value = i;
+      option.textContent = i;
+      daySelect.appendChild(option);
+    }
+
+    // Populate years
+    const yearSelect = document.querySelector("#year");
+    const currentYear = new Date().getFullYear();
+    for (let i = currentYear; i >= 1950; i--) {
+      const option = document.createElement("option");
+      option.value = i;
+      option.textContent = i;
+      yearSelect.appendChild(option);
+    }
+
+    // Password validation logic
+    function validatePassword() {
+      const password = document.getElementById("password").value;
+      const status = document.getElementById("password-status");
+      const continueBtn = document.getElementById("continueBtn");
+
+      const isLong = password.length >= 8;
+      const hasUpper = /[A-Z]/.test(password);
+      const hasLower = /[a-z]/.test(password);
+      const hasNumber = /\d/.test(password);
+
+      if (isLong && hasUpper && hasLower && hasNumber) {
+        status.textContent = "✅ Password looks good!";
+        status.className = "valid-message";
+        continueBtn.disabled = false;
+      } else {
+        status.textContent = "";
+        status.className = "";
+        continueBtn.disabled = true;
+      }
+    }
+  </script>
+
+</body>
+</html>
