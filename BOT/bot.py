@@ -8,7 +8,7 @@ from langchain_core.messages import HumanMessage
 
 # Environment setup
 os.environ["LANGSMITH_TRACING"] = "true"
-os.environ["LANGSMITH_API_KEY"] = "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"
+os.environ["LANGSMITH_API_KEY"] = ""
 if not os.environ.get(""):
     os.environ[""] = ""
 
