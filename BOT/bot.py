@@ -9,8 +9,8 @@ from langchain_core.messages import HumanMessage
 # Environment setup
 os.environ["LANGSMITH_TRACING"] = "true"
 os.environ["LANGSMITH_API_KEY"] = "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"
-if not os.environ.get("GROQ_API_KEY"):
-    os.environ["GROQ_API_KEY"] = "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"
+if not os.environ.get(""):
+    os.environ[""] = ""
 
 # Initialize model
 model = init_chat_model("llama3-8b-8192", model_provider="groq")
